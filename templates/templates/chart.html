@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">{{ name }}'s Vedic Kundli</h2>
+
+<div class="row">
+    <div class="col-md-7 text-center">
+        <h4>South Indian Rasi Chart</h4>
+        <div class="rasi">
+            {% for i in range(12) %}
+                <div>{{ SIGN_SHORT[i] }}</div>
+            {% endfor %}
+            <!-- Planets placed dynamically via JS below -->
+        </div>
+    </div>
+    
+    <div class="col-md-5">
+        <h4>Planetary Positions (Lahiri)</h4>
+        <table class="table table-bordered table-sm">
+            <thead><tr><th>Planet</th><th>Sign</th><th>Degree</th></tr></thead>
+            <tbody>
+                {% for p in positions %}
+                <tr><td><strong>{{ p.planet }}</strong></td><td>{{ p.sign }}</td><td>{{ p.degree }}°</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4>Real-time Graha Dasha <span class="badge bg-success">LIVE</span></h4>
+        <div class="alert alert-info">
+            <strong>Running Mahadasha:</strong> {{ now_dasha }}<br>
+            <small>Updates automatically • Accurate to second</small>
+        </div>
+    </div>
+</div>
+
+<h4 class="mt-5">Full Vimshottari Dasha</h4>
+<table class="table table-striped">
+    <thead><tr><th>Mahadasha</th><th>From</th><th>To</th></tr></thead>
+    <tbody>
+        {% for d in dashas %}
+        <tr><td>{{ d.mahadasha }}</td><td>{{ d.start }}</td><td>{{ d.end }}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Lahiri Daily Ephemeris</h1>
+<form method="POST" class="mb-4">
+    <input type="date" name="date" class="form-control w-25 d-inline" required>
+    <button type="submit" class="btn btn-primary">Show Positions</button>
+</form>
+
+{% if positions %}
+<h4>{{ date }}</h4>
+<table class="table table-bordered">
+    <thead><tr><th>Planet</th><th>Sign</th><th>Degree</th></tr></thead>
+    <tbody>
+        {% for p in positions %}
+        <tr><td>{{ p.planet }}</td><td>{{ p.sign }}</td><td>{{ p.degree }}°</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
